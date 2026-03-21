@@ -67,7 +67,7 @@ class Article(TimeStampedModel):
         return self.title
 
 
-class LeadFormSubmission(models.Model):
+class LeadFormSubmission(TimeStampedModel):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, blank=True)
     company_name = models.CharField(max_length=150, blank=True)
@@ -77,7 +77,6 @@ class LeadFormSubmission(models.Model):
     message = models.TextField()
     consent_given = models.BooleanField(default=False)
     status = models.CharField(max_length=30, default="new")
-    submitted_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -85,3 +84,7 @@ class LeadFormSubmission(models.Model):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}".strip()
+
+    @property
+    def submitted_at(self):
+        return self.created_at
