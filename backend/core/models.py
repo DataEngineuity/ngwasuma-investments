@@ -1,4 +1,11 @@
+"""
+Author: Data Engineuity
+Models Module
+"""
+
+from django.conf import settings
 from django.db import models
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -6,6 +13,7 @@ class TimeStampedModel(models.Model):
 
     class Meta:
         abstract = True
+
 
 class SiteSettings(TimeStampedModel):
     company_name = models.CharField(max_length=120)
@@ -56,10 +64,15 @@ class Article(TimeStampedModel):
     excerpt = models.CharField(max_length=260)
     body = models.TextField()
     category = models.CharField(max_length=80)
-    author = models.CharField(max_length=120)
     published_at = models.DateField()
     is_featured = models.BooleanField(default=False)
-
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="articles",
+    )
     class Meta:
         ordering = ['-published_at', '-created_at']
 
@@ -76,7 +89,17 @@ class LeadFormSubmission(TimeStampedModel):
     subject = models.CharField(max_length=200)
     message = models.TextField()
     consent_given = models.BooleanField(default=False)
-    status = models.CharField(max_length=30, default="new")
+
+    class LeadStatus(models.TextChoices):
+        CLOSED = "closed", "Closed"
+        SPAM = "spam", "Spam"
+        NEW = "new", "New"
+        CONTACTED = "contacted", "Contacted"
+
+    status = models.CharField(
+        max_length=30,
+        default="new"
+    )
 
     class Meta:
         ordering = ['-created_at']
