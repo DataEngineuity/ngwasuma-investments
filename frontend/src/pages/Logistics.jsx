@@ -3,10 +3,26 @@ import Hero from '../components/Hero';
 import PageIntro from '../components/PageIntro';
 import SectionHeading from '../components/SectionHeading';
 import { logisticsServices } from '../data/siteContent';
+import Seo from '../components/Seo';
+
+const logisticsJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Logistics and Freight',
+  provider: { '@id': 'https://ngwasumainvestments.com/#business' },
+  areaServed: { '@type': 'Place', name: 'Zambia & SADC' },
+  description:
+    'Long haulage, recovery services, and value-chain logistics across Zambia and the SADC region.',
+};
 
 export default function Logistics() {
   return (
     <>
+      <Seo
+        title="Logistics - Precision beyond Borders"
+        description="Long haulage, recovery services, and value-chain logistics solutions. Ngwasuma sources locally, regionally across SADC, and globally with a trusted partner network."
+        jsonLd={logisticsJsonLd}
+      />
       <Hero
         compact
         image="/assets/efficient-delivery-2x.webp"

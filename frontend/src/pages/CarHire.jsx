@@ -5,10 +5,15 @@ import Hero from '../components/Hero';
 import PageIntro from '../components/PageIntro';
 import SectionHeading from '../components/SectionHeading';
 import { carHireServices } from '../data/siteContent';
+import Seo from '../components/Seo';
 
 export default function CarHire() {
   return (
     <>
+      <Seo
+        title="Car Hire & Transport — Let's Get You Moving"
+        description="Economy and executive car hire from K650/day. Chauffeur, airport transfers, group transport, and long-distance passenger services across Zambia."
+      />
       <Hero
         compact
         image="/assets/hero-car-hire.webp"

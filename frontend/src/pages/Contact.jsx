@@ -3,10 +3,15 @@ import ContactForm from '../components/ContactForm';
 import FindUsMap from '../components/FindUsMap';
 import Hero from '../components/Hero';
 import { contact } from '../data/siteContent';
+import Seo from '../components/Seo';
 
 export default function Contact() {
   return (
     <>
+      <Seo
+        title="Contact Us"
+        description="Get in touch with Ngwasuma Investments. Email info@ngwasumainvestments.com, call +260 770 51 51 96, or visit us at Plot #1613, Ibex Meanwood, Lusaka."
+      />
       <Hero
         compact
         image="/assets/hero-contact.webp"

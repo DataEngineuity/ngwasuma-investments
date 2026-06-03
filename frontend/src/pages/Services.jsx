@@ -3,10 +3,15 @@ import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import ServiceCard from '../components/ServiceCard';
 import { services } from '../data/siteContent';
+import Seo from '../components/Seo';
 
 export default function Services() {
   return (
     <>
+      <Seo
+        title="Our Services"
+        description="Three disciplines, one operating standard: logistics, residential leasing, and car hire. Explore Ngwasuma's full range of services across Zambia and the SADC region."
+      />
       <Hero
         compact
         image="/assets/hero-logistics.webp"

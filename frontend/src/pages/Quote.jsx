@@ -1,10 +1,15 @@
 import Hero from '../components/Hero';
 import QuoteForm from '../components/QuoteForm';
 import SectionHeading from '../components/SectionHeading';
+import Seo from '../components/Seo';
 
 export default function Quote() {
   return (
     <>
+      <Seo
+        title="Request a Quote"
+        description="Request a tailored quote for logistics, real estate, or car hire services. We respond within one business day."
+      />
       <Hero
         compact
         image="/assets/hero-home.webp"

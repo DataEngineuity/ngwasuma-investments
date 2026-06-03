@@ -10,8 +10,20 @@ export const contact = {
   mapEmbedSrc: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d5163.62834883761!2d28.429363275122153!3d-15.407470685180217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDI0JzI2LjkiUyAyOMKwMjUnNTUuMCJF!5e1!3m2!1sen!2szm!4v1780480714245!5m2!1sen!2szm',
 };
 
+export const seo = {
+  siteName: 'Ngwasuma Investments',
+  legalName: 'Ngwasuma Investments Limited',
+  siteUrl: 'https://ngwasumainvestments.com',
+  defaultTitle: 'Ngwasuma Investments — Logistics, Real Estate & Car Hire in Zambia',
+  titleTemplate: '%s — Ngwasuma Investments',
+  defaultDescription:
+    'Ngwasuma Investments Limited delivers reliable logistics, residential leasing, and car hire across Zambia and the SADC region. Precision meets reliability.',
+  defaultImage: 'https://ngwasumainvestments.com/og-image.jpg',
+  locale: 'en_ZM',
+  twitterHandle: '@ngwasumainvests',
+};
+
 export const socialLinks = [
-  // Replace these placeholders with verified Ngwasuma social media URLs.
   { label: 'Facebook', href: env.VITE_FACEBOOK_URL || '#' },
   { label: 'LinkedIn', href: env.VITE_LINKEDIN_URL || '#' },
   { label: 'X', href: env.VITE_X_URL || '#' },

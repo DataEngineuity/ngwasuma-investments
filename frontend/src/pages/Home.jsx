@@ -8,14 +8,50 @@ import StatsGrid from '../components/StatsGrid';
 import ValueGrid from '../components/ValueGrid';
 import { services } from '../data/siteContent';
 
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://ngwasumainvestments.com/#business',
+  name: 'Ngwasuma Investments Limited',
+  url: 'https://ngwasumainvestments.com',
+  telephone: '+260770515196',
+  email: 'info@ngwasumainvestments.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Plot #1613, Off Chipandwe Road, Ibex Meanwood',
+    addressLocality: 'Lusaka',
+    addressRegion: 'Lusaka Province',
+    addressCountry: 'ZM',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -15.407471,
+    longitude: 28.429363,
+  },
+  sameAs: [
+    'https://instagram.com/ngwasumainvestments',
+    'https://x.com/ngwasumainvests',
+    'https://www.linkedin.com/in/ngwasuma-investments-613988409',
+  ],
+  areaServed: [
+    { '@type': 'Country', name: 'Zambia' },
+    { '@type': 'Place', name: 'SADC Region' },
+  ],
+};
+
 export default function Home() {
   return (
     <>
+        <Seo
+            title="Delivering the World to You"
+            description="Ngwasuma Investments Limited delivers reliable logistics, residential leasing, and car hire across Zambia and the SADC region. Precision meets reliability."
+            jsonLd={homeJsonLd}
+        />
       <Hero
         variant="split"
         image="/assets/hero-truck-cutout.png"
         imageAlt="Ngwasuma branded truck"
-        eyebrow="Precision meets reliability"
+        eyebrow="Precision meets reliability."
         title="Delivering the World to"
         titleAccent="You."
         body="Logistics, transport, car hire and residential leasing solutions across Zambia and the SADC region."

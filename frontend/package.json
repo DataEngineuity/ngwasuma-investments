@@ -3,12 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
-  },
+  "scripts": {},
   "dependencies": {
     "@unhead/react": "^3.1.1",
     "@vitejs/plugin-react": "latest",
@@ -25,6 +20,7 @@
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
     "postcss": "^8.4.49",
+    "puppeteer": "^25.1.0",
     "tailwindcss": "^3.4.17"
   }
 }

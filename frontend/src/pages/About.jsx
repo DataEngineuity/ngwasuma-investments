@@ -3,10 +3,15 @@ import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import StatsGrid from '../components/StatsGrid';
 import ValueGrid from '../components/ValueGrid';
+import Seo from '../components/Seo';
 
 export default function About() {
   return (
     <>
+      <Seo
+        title="About Us"
+        description="Ngwasuma Investments Limited champions precision and functionality across logistics, real estate, and transportation — anchored in Lusaka, working across the SADC region."
+      />
       <Hero
         compact
         image="/assets/hero-about.webp"

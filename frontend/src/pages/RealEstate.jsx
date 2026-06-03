@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import PageIntro from '../components/PageIntro';
 import SectionHeading from '../components/SectionHeading';
 import { residentialImages } from '../data/siteContent';
+import Seo from '../components/Seo';
 
 const bullets = [
   'Tenant placement and lease coordination',
@@ -15,6 +16,10 @@ const bullets = [
 export default function RealEstate() {
   return (
     <>
+      <Seo
+        title="Real Estate — Curating Better Structures"
+        description="Residential leasing services connecting tenants with quality homes and providing property owners reliable, professional management of their rentals in Lusaka."
+      />
       <Hero
         compact
         image="/assets/hero-real-estate.webp"
