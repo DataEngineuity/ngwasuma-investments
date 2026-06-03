@@ -1,3 +1,4 @@
+import Seo from '../components/Seo';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ContactStrip from '../components/ContactStrip';

@@ -4,6 +4,8 @@ import { createHead, UnheadProvider } from '@unhead/react/client'
 import App from './App.jsx';
 import './index.css';
 
+const head = createHead();
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <UnheadProvider head={head}>
