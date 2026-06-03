@@ -96,26 +96,34 @@ export default function Footer() {
             </div>
             <div className="min-w-0">
               <h3 className="text-sm font-black uppercase tracking-[0.2em] text-slate-400">Contact</h3>
+
               <ul className="mt-5 space-y-4 text-sm text-slate-600">
                 <li className="flex min-w-0 items-start gap-3">
                   <Mail size={17} className="mt-0.5 shrink-0 text-limebrand" />
-                  <a href={`mailto:${contact.email}`} title={contact.email} className="min-w-0 flex-1 truncate transition hover:text-ink">
+                  <a
+                    href={`mailto:${contact.email}`}
+                    title={contact.email}
+                    className="min-w-0 flex-1 truncate transition hover:text-ink"
+                  >
                     {contact.email}
                   </a>
                 </li>
+
                 <li className="flex items-start gap-3">
                   <Phone size={17} className="mt-0.5 shrink-0 text-limebrand" />
-                  <a href={`tel:${contact.phone.replaceAll(' ', '')}`} className="whitespace-nowrap transition hover:text-ink">
+                  <a
+                    href={`tel:${contact.phone.replaceAll(' ', '')}`}
+                    className="whitespace-nowrap transition hover:text-ink"
+                  >
                     {contact.phone}
                   </a>
                 </li>
+
                 <li className="flex items-start gap-3">
                   <MapPin size={17} className="mt-0.5 shrink-0 text-limebrand" />
-                  <address className="not-italic leading-6 text-slate-600">
-                    <span className="block">Plot #1613, Off Chipandwe Road,</span>
-                    <span className="block">Ibex Meanwood, Lusaka,</span>
-                    <span className="block">Lusaka Province, Zambia</span>
-                  </address>
+                  <a href="/contact#office-location" className="transition hover:text-ink">
+                    Office location & directions
+                  </a>
                 </li>
               </ul>
             </div>

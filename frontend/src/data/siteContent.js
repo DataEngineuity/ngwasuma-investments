@@ -1,10 +1,13 @@
 const env = import.meta.env || {};
 
 export const contact = {
-  company: 'Ngwasuma Investments',
+  company: 'Ngwasuma Investments Limited',
   email: 'info@ngwasumainvestments.com',
   phone: '+260 770 51 51 96',
   address: 'Plot #1613, Off Chipandwe Road, Ibex Meanwood, Lusaka, Lusaka Province, Zambia',
+  locationLabel: 'Ibex Meanwood, Lusaka',
+  directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=-15.407471,28.429363',
+  mapEmbedSrc: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d5163.62834883761!2d28.429363275122153!3d-15.407470685180217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDI0JzI2LjkiUyAyOMKwMjUnNTUuMCJF!5e1!3m2!1sen!2szm!4v1780480714245!5m2!1sen!2szm',
 };
 
 export const socialLinks = [
