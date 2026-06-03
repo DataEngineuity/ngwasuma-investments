@@ -8,6 +8,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <UnheadProvider head={head}>
         <App />
-      <UnheadProvider/>
-  </React.StrictMode>,
+      </UnheadProvider>
+  </React.StrictMode>
 );
