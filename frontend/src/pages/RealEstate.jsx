@@ -27,6 +27,7 @@ export default function RealEstate() {
         title="Curating Better"
         titleAccent="Structures"
         body="Quality homes and professional property coordination for tenants and residential property owners."
+        primary={{ label: 'Get a Quote', href: '/quote?service=real-estate' }}
       />
       <PageIntro
         title="Real Estate Services"

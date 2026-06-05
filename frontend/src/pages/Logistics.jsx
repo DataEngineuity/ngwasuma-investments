@@ -30,6 +30,7 @@ export default function Logistics() {
         title="Precision Beyond"
         titleAccent="Borders"
         body="Client-centered logistics and transport services for secure, timely movement across regional and international routes."
+        primary={{ label: 'Get a Quote', href: '/quote?service=logistics' }}
       />
       <PageIntro
         title="Logistics Services"

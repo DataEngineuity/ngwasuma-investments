@@ -216,16 +216,20 @@ function Field({ field, value, onChange }) {
   );
 }
 
-export default function QuoteForm() {
+export default function QuoteForm({ defaultService = 'Logistics' }) {
   const serviceOptions = useMemo(() => {
     const titles = services?.map((service) => service.title).filter(Boolean) || [];
     return titles.length ? titles : fallbackServices;
   }, []);
 
-  const [form, setForm] = useState(() => ({
-    ...baseForm,
-    service: serviceOptions[0] || 'Logistics',
-  }));
+    const normalizedDefaultService = serviceOptions.includes(defaultService)
+      ? defaultService
+      : 'Logistics';
+
+    const [form, setForm] = useState(() => ({
+      ...baseForm,
+      service: normalizedDefaultService,
+    }));
 
   const [status, setStatus] = useState({ type: 'idle', message: '' });
   const [loading, setLoading] = useState(false);
@@ -293,10 +297,10 @@ export default function QuoteForm() {
     try {
       await submitQuote(payload);
 
-      setForm({
-        ...baseForm,
-        service: serviceOptions[0] || 'Logistics',
-      });
+    setForm({
+      ...baseForm,
+      service: normalizedDefaultService,
+    });
 
       setStatus({
         type: 'success',

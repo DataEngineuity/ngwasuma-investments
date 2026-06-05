@@ -132,3 +132,10 @@ export const residentialImages = [
   '/assets/real-estate-leasing.webp',
   '/assets/real-estate-apartments.webp',
 ];
+
+export const quoteLinks = {
+  default: '/quote',
+  logistics: '/quote?service=logistics',
+  realEstate: '/quote?service=real-estate',
+  carHire: '/quote?service=car-hire',
+};

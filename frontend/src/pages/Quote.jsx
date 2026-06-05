@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
 import QuoteForm from '../components/QuoteForm';
 import SectionHeading from '../components/SectionHeading';
@@ -5,6 +7,22 @@ import Seo from '../components/Seo';
 import { contact } from '../data/siteContent';
 
 export default function Quote() {
+    const location = useLocation();
+
+    const defaultService = useMemo(() => {
+        const params = new URLSearchParams(location.search);
+        const service = params.get('service');
+
+        const serviceMap = {
+            logistics: 'Logistics',
+            'real-estate': 'Real Estate',
+            realestate: 'Real Estate',
+            carhire: 'Car Hire',
+            'car-hire': 'Car Hire',
+        };
+
+        return serviceMap[service?.toLowerCase()] || 'Logistics';
+    }, [location.search]);
   return (
     <>
       <Seo
@@ -69,7 +87,7 @@ export default function Quote() {
             </div>
           </div>
 
-          <QuoteForm />
+          <QuoteForm defaultService={defaultService}/>
         </div>
       </section>
     </>

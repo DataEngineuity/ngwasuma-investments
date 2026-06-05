@@ -21,7 +21,7 @@ export default function CarHire() {
         title="Let’s Get You"
         titleAccent="Moving"
         body="Economy, executive, chauffeur, staff and group transportation options for daily, corporate and long-distance travel."
-        primary={{ label: 'See Pricing', href: '/quote' }}
+        primary={{ label: 'See Pricing', href: '/quote?service=car-hire' }}
       />
       <PageIntro
         title="Transportation Services"
@@ -53,7 +53,7 @@ export default function CarHire() {
                 <h3 className="mt-4 font-display text-4xl font-black tracking-[-0.06em]">Economy rates start from K650/day.</h3>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">Executive hire starts from K1,400/day depending on vehicle class, route and requirements.</p>
               </div>
-              <Link to="/quote" className="btn-primary">
+              <Link to="/quote?service=car-hire" className="btn-primary">
                 Request Availability <ArrowRight size={18} />
               </Link>
             </div>
