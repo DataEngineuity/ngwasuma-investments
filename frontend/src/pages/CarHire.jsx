@@ -21,7 +21,7 @@ export default function CarHire() {
         title="Let’s Get You"
         titleAccent="Moving"
         body="Economy, executive, chauffeur, staff and group transportation options for daily, corporate and long-distance travel."
-        primary={{ label: 'See Pricing', href: '/quote?service=car-hire' }}
+        primary={{ label: 'Get a Quote', href: '/quote?service=car-hire' }}
       />
       <PageIntro
         title="Transportation Services"
