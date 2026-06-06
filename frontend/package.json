@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "og": "node scripts/generate-og.js",
-    "build": "npm run og && vite build",
+    "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
+    "og": "node scripts/generate-og.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
