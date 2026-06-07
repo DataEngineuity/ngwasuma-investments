@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+  />
+  <style>
+    body {
+      margin: 0;
+      background: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Onest', system-ui, sans-serif;
+    }
+
+    /* The OG card itself — exact 1200×630 export size */
+    .og {
+      width: 1200px;
+      height: 630px;
+      background: #0E2B26;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* Decorative lime grid in the background */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(168, 220, 47, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 220, 47, 0.07) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    /* Subtle lime gradient glow from bottom-right */
+    .glow {
+      position: absolute;
+      right: -240px;
+      bottom: -240px;
+      width: 720px;
+      height: 720px;
+      background: radial-gradient(circle, rgba(168, 220, 47, 0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Top metadata strip */
+    .meta {
+      position: absolute;
+      top: 56px;
+      left: 64px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+    }
+    .meta-dot { color: #A8DC2F; font-size: 11px; }
+
+    /* Bottom right: logo lockup */
+    .logo {
+      height: 90px;                /* was 64px — ~40% bigger */
+      flex-shrink: 0;              /* don't let the pills squish the logo */
+    }
+
+    .logo img {
+      height: 100%;
+      width: auto;
+      display: block;
+    }
+
+    /* Main content area */
+    .content {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .headline {
+      font-family: 'Onest', sans-serif;
+      font-weight: 300;
+      font-size: 96px;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: #fff;
+      max-width: 14ch;
+      margin: 0;
+    }
+    .headline-accent {
+      color: #A8DC2F;
+      font-weight: 400;
+    }
+    .headline-period {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      color: #A8DC2F;
+      font-weight: 400;
+    }
+
+    .tagline {
+      margin-top: 28px;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.005em;
+    }
+
+    /* Bottom row: pills (left) and logo (right) on one aligned line */
+    .bottom-row {
+      position: absolute;
+      bottom: 56px;
+      left: 64px;
+      right: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .services {
+      display: flex;
+      gap: 18px;
+    }
+
+    .service-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 16px 20px;
+      border-radius: 999px;
+      background: rgba(168, 220, 47, 0.12);
+      color: #A8DC2F;
+      border: 1px solid rgba(168, 220, 47, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <div class="grid"></div>
+    <div class="glow"></div>
+
+    <!-- Top meta strip -->
+    <div class="meta">
+      <span class="meta-dot">●</span>
+      <span>Ngwasuma Investments Limited</span>
+      <span style="opacity: 0.4;">/</span>
+      <span>Lusaka, Zambia · SADC</span>
+    </div>
+
+    <!-- Main headline -->
+    <div class="content">
+      <h1 class="headline">
+        Delivering<br />
+        the World to<br />
+        <span class="headline-accent">You</span><span class="headline-period">.</span>
+      </h1>
+      <p class="tagline">Precision meets reliability.</p>
+    </div>
+
+    <div class="bottom-row">
+      <!-- Service pills -->
+      <div class="services">
+        <span class="service-pill">Logistics</span>
+        <span class="service-pill">Real Estate</span>
+        <span class="service-pill">Car Hire</span>
+      </div>
+
+      <div class="logo">
+        <img src="../public/brand/ngwasuma-emblem-color.png" alt="Ngwasuma Investments" />
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
