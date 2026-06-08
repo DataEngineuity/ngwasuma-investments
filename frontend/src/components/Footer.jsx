@@ -37,20 +37,20 @@ export default function Footer() {
   return (
     <footer className="bg-white pt-8 pb-12 text-ink md:pt-10 md:pb-14">
       <div className="container-page">
-        <div className="grid gap-12 lg:grid-cols-[1.15fr_2.2fr]">
-          <div>
+        <div className="grid gap-12 text-center sm:text-left lg:grid-cols-[1.15fr_2.2fr]">
+          <div className="flex flex-col items-center sm:items-start">
             <BrandLogo dark />
             <p className="mt-5 max-w-md text-sm leading-7 text-slate-600">
               Industries thrive on sustainable supply solutions. We champion precision and functionality across logistics,
               real estate and transportation with local and global network proficiency.
             </p>
-            <div className="mt-6">
+            <div className="mt-6 w-full">
               <h3 className="text-sm font-black uppercase tracking-[0.2em] text-slate-400">Follow Us</h3>
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-4 flex items-center justify-center gap-3 sm:justify-start">
                 {socialLinks.map((item) => {
                   const hasUrl = item.href && item.href !== '#';
                   return (
-                    <a
+
                       key={item.label}
                       href={hasUrl ? item.href : '#'}
                       target={hasUrl ? '_blank' : undefined}
@@ -98,9 +98,9 @@ export default function Footer() {
               <h3 className="text-sm font-black uppercase tracking-[0.2em] text-slate-400">Contact</h3>
 
               <ul className="mt-5 space-y-4 text-sm text-slate-600">
-                <li className="flex min-w-0 items-start gap-3">
-                  <Mail size={17} className="mt-0.5 shrink-0 text-limebrand" />
-                  <a
+                <li className="flex min-w-0 items-center justify-center gap-3 sm:items-start sm:justify-start">
+                  <Mail size={17} className="shrink-0 text-limebrand sm:mt-0.5" />
+
                     href={`mailto:${contact.email}`}
                     title={contact.email}
                     className="min-w-0 flex-1 truncate transition hover:text-ink"
@@ -109,9 +109,9 @@ export default function Footer() {
                   </a>
                 </li>
 
-                <li className="flex items-start gap-3">
-                  <Phone size={17} className="mt-0.5 shrink-0 text-limebrand" />
-                  <a
+                <li className="flex items-center justify-center gap-3 sm:items-start sm:justify-start">
+                  <Phone size={17} className="shrink-0 text-limebrand sm:mt-0.5" />
+
                     href={`tel:${contact.phone.replaceAll(' ', '')}`}
                     className="whitespace-nowrap transition hover:text-ink"
                   >
@@ -119,8 +119,8 @@ export default function Footer() {
                   </a>
                 </li>
 
-                <li className="flex items-start gap-3">
-                  <MapPin size={17} className="mt-0.5 shrink-0 text-limebrand" />
+                <li className="flex items-center justify-center gap-3 sm:items-start sm:justify-start">
+                  <MapPin size={17} className="shrink-0 text-limebrand sm:mt-0.5" />
                   <a href="/contact#office-location" className="transition hover:text-ink">
                     Office location & directions
                   </a>
@@ -129,7 +129,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-10 border-t border-slate-200 pt-6 text-xs font-bold text-slate-400">
+        <div className="mt-10 border-t border-slate-200 pt-6 text-center text-xs font-bold text-slate-400 sm:text-left">
           2026 All Rights Reserved. Ngwasuma Investments Limited
         </div>
       </div>
