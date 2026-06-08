@@ -14,7 +14,7 @@ export const seo = {
   siteName: 'Ngwasuma Investments',
   legalName: 'Ngwasuma Investments Limited',
   siteUrl: 'https://ngwasumainvestments.com',
-  defaultTitle: 'Ngwasuma Investments — Logistics, Real Estate & Car Hire in Zambia',
+  defaultTitle: 'Ngwasuma Investments Limited — Logistics, Real Estate & Car Hire in Zambia and the SADC region.',
   titleTemplate: '%s — Ngwasuma Investments',
   defaultDescription:
     'Ngwasuma Investments Limited delivers reliable logistics, residential leasing, and car hire across Zambia and the SADC region. Precision meets reliability.',

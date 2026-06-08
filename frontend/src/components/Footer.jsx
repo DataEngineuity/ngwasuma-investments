@@ -89,8 +89,8 @@ export default function Footer() {
             <div>
               <h3 className="text-sm font-black uppercase tracking-[0.2em] text-slate-400">Support</h3>
               <ul className="mt-5 space-y-3 text-sm font-bold text-slate-600">
-                <li><Link to="/services">Fleet Gallery</Link></li>
-                <li><Link to="/contact">How to track shipments</Link></li>
+                <li><Link to="/fleet-gallery">Fleet Gallery</Link></li>
+                <li><Link to="/track-shipments">How to track shipments</Link></li>
                 <li><Link to="/contact">Support</Link></li>
               </ul>
             </div>

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/Layout';
 import About from './pages/About';
+import ComingSoon from './pages/ComingSoon';
 import CarHire from './pages/CarHire';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
@@ -24,6 +25,20 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       { path: 'contact', element: <Contact /> },
       { path: 'quote', element: <Quote /> },
+      {
+        path: 'fleet-gallery',
+        element: <ComingSoon title="Fleet Gallery" eta="Q3 2026" />,
+      },
+      {
+        path: 'track-shipments',
+        element: (
+          <ComingSoon
+            title="Shipment Tracking"
+            eta="Q4 2026"
+            description="Real-time GPS tracking for your shipments is coming. Until then, our operations team will keep you updated by phone or email — give them a call any time."
+          />
+        ),
+      },
       { path: '*', element: <NotFound /> },
     ],
   },
