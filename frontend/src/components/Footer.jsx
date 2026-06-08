@@ -50,7 +50,7 @@ export default function Footer() {
                 {socialLinks.map((item) => {
                   const hasUrl = item.href && item.href !== '#';
                   return (
-
+                    <a
                       key={item.label}
                       href={hasUrl ? item.href : '#'}
                       target={hasUrl ? '_blank' : undefined}
@@ -100,6 +100,7 @@ export default function Footer() {
               <ul className="mt-5 space-y-4 text-sm text-slate-600">
                 <li className="flex min-w-0 items-center justify-center gap-3 sm:items-start sm:justify-start">
                   <Mail size={17} className="shrink-0 text-limebrand sm:mt-0.5" />
+                  <a
 
                     href={`mailto:${contact.email}`}
                     title={contact.email}
@@ -111,7 +112,7 @@ export default function Footer() {
 
                 <li className="flex items-center justify-center gap-3 sm:items-start sm:justify-start">
                   <Phone size={17} className="shrink-0 text-limebrand sm:mt-0.5" />
-
+                  <a
                     href={`tel:${contact.phone.replaceAll(' ', '')}`}
                     className="whitespace-nowrap transition hover:text-ink"
                   >
