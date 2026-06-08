@@ -1,10 +1,11 @@
 import { CheckCircle2 } from 'lucide-react';
-import ContactStrip from '../components/ContactStrip';
+// import ContactStrip from '../components/ContactStrip';
 import Hero from '../components/Hero';
 import PageIntro from '../components/PageIntro';
 import SectionHeading from '../components/SectionHeading';
 import { residentialImages } from '../data/siteContent';
 import Seo from '../components/Seo';
+import QuoteCTA from '../components/QuoteCTA';
 
 const bullets = [
   'Tenant placement and lease coordination',
@@ -61,13 +62,18 @@ export default function RealEstate() {
           </div>
         </div>
       </section>
-      <ContactStrip
-        eyebrow="Residential leasing"
-        title="Looking for a home or tenant?"
-        accent="Schedule a viewing."
-        defaultService="Real Estate"
-        buttonLabel="Schedule Viewing"
-        messagePlaceholder="Tell us the type of home, preferred location, budget range and viewing date..."
+{/*       <ContactStrip */}
+{/*         eyebrow="Residential leasing" */}
+{/*         title="Looking for a home or tenant?" */}
+{/*         accent="Schedule a viewing." */}
+{/*         defaultService="Real Estate" */}
+{/*         buttonLabel="Schedule Viewing" */}
+{/*         messagePlaceholder="Tell us the type of home, preferred location, budget range and viewing date..." */}
+{/*       /> */}
+      <QuoteCTA
+        service="real-estate"
+        title="Find your next residence."
+        subtitle="Share what you're looking for — type, area, budget — and we'll match you with available properties."
       />
     </>
   );

@@ -1,9 +1,10 @@
-import ContactStrip from '../components/ContactStrip';
+// import ContactStrip from '../components/ContactStrip';
 import Hero from '../components/Hero';
 import PageIntro from '../components/PageIntro';
 import SectionHeading from '../components/SectionHeading';
 import { logisticsServices } from '../data/siteContent';
 import Seo from '../components/Seo';
+import QuoteCTA from '../components/QuoteCTA';
 
 const logisticsJsonLd = {
   '@context': 'https://schema.org',
@@ -57,13 +58,18 @@ export default function Logistics() {
           </div>
         </div>
       </section>
-      <ContactStrip
-        eyebrow="Logistics quote"
-        title="Need cargo moved?"
-        accent="Get a logistics quote."
-        defaultService="Logistics"
-        buttonLabel="Get Logistics Quote"
-        messagePlaceholder="Tell us the cargo type, route, timing and any handling requirements..."
+{/*       <ContactStrip */}
+{/*         eyebrow="Logistics quote" */}
+{/*         title="Need cargo moved?" */}
+{/*         accent="Get a logistics quote." */}
+{/*         defaultService="Logistics" */}
+{/*         buttonLabel="Get Logistics Quote" */}
+{/*         messagePlaceholder="Tell us the cargo type, route, timing and any handling requirements..." */}
+{/*       /> */}
+      <QuoteCTA
+        service="logistics"
+        title="Move cargo with confidence."
+        subtitle="Tell us your route, cargo type, and timeline — we'll come back with a quote within one business day."
       />
     </>
   );

@@ -6,6 +6,7 @@ import PageIntro from '../components/PageIntro';
 import SectionHeading from '../components/SectionHeading';
 import { carHireServices } from '../data/siteContent';
 import Seo from '../components/Seo';
+import QuoteCTA from '../components/QuoteCTA';
 
 export default function CarHire() {
   return (
@@ -60,13 +61,18 @@ export default function CarHire() {
           </div>
         </div>
       </section>
-      <ContactStrip
-        eyebrow="Vehicle availability"
-        title="Need reliable transport?"
-        accent="Check availability."
-        defaultService="Car Hire"
-        buttonLabel="Check Availability"
-        messagePlaceholder="Tell us your dates, vehicle preference, pickup location and passenger count..."
+{/*       <ContactStrip */}
+{/*         eyebrow="Vehicle availability" */}
+{/*         title="Need reliable transport?" */}
+{/*         accent="Check availability." */}
+{/*         defaultService="Car Hire" */}
+{/*         buttonLabel="Check Availability" */}
+{/*         messagePlaceholder="Tell us your dates, vehicle preference, pickup location and passenger count..." */}
+{/*       /> */}
+      <QuoteCTA
+       service="car-hire"
+       title="Let's get you moving."
+       subtitle="Tell us your dates, destination, and vehicle preference — confirmation within hours."
       />
     </>
   );
