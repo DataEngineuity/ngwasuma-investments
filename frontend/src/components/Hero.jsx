@@ -34,63 +34,67 @@ export default function Hero({
   compact = false,
   variant = 'overlay',
 }) {
-if (variant === 'split') {
-  return (
-    <section className="relative overflow-hidden bg-[#adadad] text-white">
-      <div className="absolute inset-0 bg-gradient-to-r from-black/12 via-transparent to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/8 to-transparent" />
+  if (variant === 'split') {
+    return (
+      <section className="relative overflow-hidden bg-[#adadad] text-white">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/12 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/8 to-transparent" />
 
-      <div className="container-page relative grid min-h-[690px] items-center gap-8 pb-16 pt-32 md:min-h-[720px] md:pt-36 lg:grid-cols-[0.38fr_0.62fr] lg:gap-4 lg:pt-38 xl:min-h-[740px]">
-        <div className="max-w-[31rem]">
-          <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/45 bg-white/35 px-4 py-2 text-sm font-bold text-ink/85 shadow-sm backdrop-blur">
-            <ShieldCheck size={17} className="text-limebrand" />
-            {eyebrow}
+        <div className="container-page relative grid items-center gap-8 pb-16 pt-20 md:min-h-[720px] md:pt-36 lg:min-h-[690px] lg:grid-cols-[0.38fr_0.62fr] lg:gap-4 lg:pt-38 xl:min-h-[740px]">
+
+          {/* TEXT BLOCK — second on mobile, first on lg */}
+          <div className="order-2 max-w-[31rem] lg:order-1">
+            <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/45 bg-white/35 px-4 py-2 text-sm font-bold text-ink/85 shadow-sm backdrop-blur">
+              <ShieldCheck size={17} className="text-limebrand" />
+              {eyebrow}
+            </div>
+
+            <h1 className="font-display text-[clamp(4rem,5.7vw,6.2rem)] font-light leading-[0.9] tracking-[-0.075em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.18)]">
+              {title}
+              {titleAccent && (
+                <span className="block font-black text-limebrand">
+                  {titleAccent}
+                </span>
+              )}
+            </h1>
+
+            {body && (
+              <p className="mt-8 max-w-[30rem] text-lg leading-8 text-white/95 md:text-xl">
+                {body}
+              </p>
+            )}
+
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              {primary && (
+                <SmartLink href={primary.href} className="btn-primary">
+                  {primary.label} <ArrowRight size={18} />
+                </SmartLink>
+              )}
+
+              {secondary && (
+                <SmartLink
+                  href={secondary.href}
+                  className="btn-secondary !border-white/45 !bg-white/35 !text-ink shadow-sm backdrop-blur hover:!bg-white/60"
+                >
+                  {secondary.label}
+                </SmartLink>
+              )}
+            </div>
           </div>
 
-          <h1 className="font-display text-[clamp(4rem,5.7vw,6.2rem)] font-light leading-[0.9] tracking-[-0.075em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.18)]">
-            {title}
-            {titleAccent && (
-              <span className="block font-black text-limebrand">
-                {titleAccent}
-              </span>
-            )}
-          </h1>
-
-          {body && (
-            <p className="mt-8 max-w-[30rem] text-lg leading-8 text-white/95 md:text-xl">
-              {body}
-            </p>
-          )}
-
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            {primary && (
-              <SmartLink href={primary.href} className="btn-primary">
-                {primary.label} <ArrowRight size={18} />
-              </SmartLink>
-            )}
-
-            {secondary && (
-              <SmartLink
-                href={secondary.href}
-                className="btn-secondary !border-white/45 !bg-white/35 !text-ink shadow-sm backdrop-blur hover:!bg-white/60"
-              >
-                {secondary.label}
-              </SmartLink>
-            )}
+          {/* IMAGE BLOCK — first on mobile, second on lg */}
+          <div className="order-1 flex items-center justify-end lg:order-2 lg:pl-2">
+            <img
+              src={image}
+              alt={imageAlt}
+              className="w-full max-w-[980px] object-contain drop-shadow-[0_18px_34px_rgba(0,0,0,0.14)] lg:translate-x-3 xl:translate-x-6"
+            />
           </div>
-        </div>
 
-        <div className="flex items-center justify-end lg:pl-2">
-          <img
-            src={image}
-            alt={imageAlt}
-            className="w-full max-w-[980px] object-contain drop-shadow-[0_18px_34px_rgba(0,0,0,0.14)] lg:translate-x-3 xl:translate-x-6"
-          />
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
+    );
+  }
 
   return (
     <section

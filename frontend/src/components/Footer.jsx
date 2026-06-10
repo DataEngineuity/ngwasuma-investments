@@ -104,7 +104,7 @@ export default function Footer() {
 
                     href={`mailto:${contact.email}`}
                     title={contact.email}
-                    className="min-w-0 flex-1 truncate transition hover:text-ink"
+                    className="min-w-0 truncate transition hover:text-ink sm:flex-1"
                   >
                     {contact.email}
                   </a>

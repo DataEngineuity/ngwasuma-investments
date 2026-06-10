@@ -43,11 +43,12 @@ const homeJsonLd = {
 export default function Home() {
   return (
     <>
-        <Seo
-            title="Delivering the World to You"
-            description="Ngwasuma Investments Limited delivers reliable logistics, residential leasing, and car hire across Zambia and the SADC region. Precision meets reliability."
-            jsonLd={homeJsonLd}
-        />
+      <Seo
+        title="Delivering the World to You"
+        description="Ngwasuma Investments Limited delivers reliable logistics, residential leasing, and car hire across Zambia and the SADC region. Precision meets reliability."
+        jsonLd={homeJsonLd}
+      />
+
       <Hero
         variant="split"
         image="/assets/hero-truck-cutout.png"
@@ -124,7 +125,7 @@ export default function Home() {
 
       <ContactStrip
         eyebrow="Ready to move forward"
-        title="Let’s get you moving."
+        title="Let's get you moving."
         accent="Request a quote today."
         defaultService="Logistics"
         buttonLabel="Request a Quote"
