@@ -1,0 +1,17 @@
+# Core
+Django>=5.0,<5.2
+djangorestframework>=3.15,<4.0
+
+# CORS — needed for Vite frontend to call the API from a different origin
+django-cors-headers>=4.3,<5.0
+
+# Settings & env management
+python-decouple>=3.8
+dj-database-url>=2.1
+
+# Production serving
+gunicorn>=21.2
+whitenoise>=6.6
+
+# Database driver — uncomment for production Postgres
+# psycopg[binary]>=3.1
