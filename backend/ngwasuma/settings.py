@@ -6,10 +6,9 @@ hosts, CORS origins, email config) are read from environment variables via
 python-decouple. Drop a .env file in the project root for local dev; in
 production these are typically set by the hosting platform.
 """
-
+import os
 from pathlib import Path
 
-import dj_database_url
 from decouple import Csv, config
 
 # ─────────────────────────────────────────────────────────────────────
@@ -83,10 +82,18 @@ ASGI_APPLICATION = 'ngwasuma.asgi.application'
 # Default: SQLite for local dev. Production: set DATABASE_URL to a
 # Postgres URL and uncomment psycopg in requirements.txt.
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
-        conn_max_age=600,
-    ),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'mydb'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+        'CONN_MAX_AGE': 600,
+        'OPTIONS': {
+            'sslmode': os.environ.get('DB_SSLMODE', 'prefer'),
+        },
+    }
 }
 
 
