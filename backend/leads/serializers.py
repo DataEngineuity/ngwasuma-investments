@@ -1,19 +1,24 @@
 """
 Serializers for the public lead-creation endpoints.
 
-These are deliberately strict about which fields the client may write.
-Server-side metadata (IP, user agent, source, handled state) is set in
-the view from request data, never trusted from the JSON body.
-
-A honeypot field named ``website`` is checked on both serializers.
-Bots tend to fill in every visible field; humans see nothing because
-the frontend never renders it. If a submission arrives with this field
-populated, we reject it silently as spam.
+QuoteRequestSerializer is the interesting one: it accepts a flat "detail"
+object whose shape depends on the chosen ``service``, and routes it to the
+matching child table (LogisticsDetail / CarHireDetail / RealEstateDetail)
+at creation time. Only the fields relevant to the selected service are
+ever written — there is no row anywhere with another service's columns
+sitting blank.
 """
 
 from rest_framework import serializers
 
-from .models import ContactMessage, QuoteRequest
+from .models import (
+    CarHireDetail,
+    ContactMessage,
+    LogisticsDetail,
+    QuoteRequest,
+    RealEstateDetail,
+    SERVICE_DETAIL_MAP,
+)
 
 
 class HoneypotMixin:
@@ -53,40 +58,134 @@ class ContactMessageSerializer(HoneypotMixin, serializers.ModelSerializer):
         }
 
 
+# ─────────────────────────────────────────────────────────────────────
+# Per-service detail serializers — field lists mirror QuoteForm.jsx's
+# serviceConfigs exactly, so the frontend can send its `details` object
+# through with no remapping.
+# ─────────────────────────────────────────────────────────────────────
+class LogisticsDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LogisticsDetail
+        fields = [
+            'request_type',
+            'origin',
+            'destination',
+            'cargo_type',
+            'cargo_weight',
+            'preferred_date',
+        ]
+
+    def to_internal_value(self, data):
+        if isinstance(data, dict) and data.get('preferred_date') == '':
+            data = data.copy()
+            data['preferred_date'] = None
+        return super().to_internal_value(data)
+
+
+class CarHireDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CarHireDetail
+        fields = [
+            'request_type',
+            'vehicle_type',
+            'pickup_location',
+            'return_location',
+            'pickup_date',
+            'return_date',
+            'passengers',
+        ]
+
+    def to_internal_value(self, data):
+        if isinstance(data, dict):
+            data = data.copy()
+            for date_field in ('pickup_date', 'return_date'):
+                if data.get(date_field) == '':
+                    data[date_field] = None
+        return super().to_internal_value(data)
+
+
+class RealEstateDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RealEstateDetail
+        fields = [
+            'request_type',
+            'property_type',
+            'preferred_area',
+            'bedrooms',
+            'budget',
+            'preferred_date',
+        ]
+
+    def to_internal_value(self, data):
+        if isinstance(data, dict) and data.get('preferred_date') == '':
+            data = data.copy()
+            data['preferred_date'] = None
+        return super().to_internal_value(data)
+
+
+DETAIL_SERIALIZER_MAP = {
+    'Logistics': LogisticsDetailSerializer,
+    'Car Hire': CarHireDetailSerializer,
+    'Real Estate': RealEstateDetailSerializer,
+}
+
+
 class QuoteRequestSerializer(HoneypotMixin, serializers.ModelSerializer):
-    # Accept null for preferred_date because the frontend may send '' or
-    # nothing at all when the user hasn't picked a date.
-    preferred_date = serializers.DateField(required=False, allow_null=True)
+    # Write-only nested payload — key must match the chosen `service`.
+    # e.g. service="Logistics" pairs with a `details` object shaped like
+    # LogisticsDetailSerializer's fields. Optional at the field level so
+    # validate() can raise a clearer error when it's missing or mismatched.
+    details = serializers.DictField(required=False, write_only=True)
 
     class Meta:
         model = QuoteRequest
         fields = [
             'id',
+            'quote_number',
             'name',
             'email',
             'phone',
             'service',
-            'origin',
-            'destination',
-            'preferred_date',
-            'cargo_or_need',
             'message',
+            'details',
             'created_at',
         ]
-        read_only_fields = ['id', 'created_at']
+        read_only_fields = ['id', 'quote_number', 'created_at']
         extra_kwargs = {
             'name': {'trim_whitespace': True},
             'message': {'trim_whitespace': True, 'required': False, 'allow_blank': True},
-            'phone': {'required': False, 'allow_blank': True},
-            'origin': {'required': False, 'allow_blank': True},
-            'destination': {'required': False, 'allow_blank': True},
-            'cargo_or_need': {'required': False, 'allow_blank': True},
         }
 
-    def to_internal_value(self, data):
-        # The frontend sends preferred_date as '' when empty, but DRF
-        # wants a real null. Normalise before the field validator runs.
-        if isinstance(data, dict) and data.get('preferred_date') == '':
-            data = data.copy()
-            data['preferred_date'] = None
-        return super().to_internal_value(data)
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+
+        service = attrs.get('service')
+        detail_serializer_class = DETAIL_SERIALIZER_MAP.get(service)
+
+        if detail_serializer_class is None:
+            # "General Support" (or any future service without a detail
+            # table) simply has no structured detail — that's fine, drop
+            # whatever was sent under `details` and move on.
+            attrs.pop('details', None)
+            return attrs
+
+        raw_details = attrs.get('details') or {}
+        detail_serializer = detail_serializer_class(data=raw_details)
+        detail_serializer.is_valid(raise_exception=True)
+
+        # Stash the validated (not raw) detail data for create() to use.
+        attrs['details'] = detail_serializer.validated_data
+        return attrs
+
+    def create(self, validated_data):
+        details = validated_data.pop('details', None)
+        service = validated_data.get('service')
+
+        quote = QuoteRequest.objects.create(**validated_data)
+
+        mapping = SERVICE_DETAIL_MAP.get(service)
+        if mapping and details:
+            _related_name, detail_model = mapping
+            detail_model.objects.create(quote=quote, **details)
+
+        return quote

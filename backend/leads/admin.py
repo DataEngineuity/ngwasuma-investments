@@ -8,7 +8,14 @@ a couple of bulk actions.
 
 from django.contrib import admin, messages
 
-from .models import ContactMessage, QuoteRequest
+from .models import (
+    CarHireDetail,
+    ContactMessage,
+    LogisticsDetail,
+    QuoteNumberSequence,
+    QuoteRequest,
+    RealEstateDetail,
+)
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -76,20 +83,71 @@ class ContactMessageAdmin(LeadAdminBase):
 
 
 # ─────────────────────────────────────────────────────────────────────
+# Quote number sequence — read-only visibility for auditing. The team
+# never edits this directly; it's maintained by generate_quote_number().
+# ─────────────────────────────────────────────────────────────────────
+@admin.register(QuoteNumberSequence)
+class QuoteNumberSequenceAdmin(admin.ModelAdmin):
+    list_display = ('year', 'last_number')
+    ordering = ('-year',)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+# ─────────────────────────────────────────────────────────────────────
 # Quote requests
 # ─────────────────────────────────────────────────────────────────────
+class LogisticsDetailInline(admin.StackedInline):
+    model = LogisticsDetail
+    can_delete = False
+    extra = 1
+    max_num = 1
+
+
+class CarHireDetailInline(admin.StackedInline):
+    model = CarHireDetail
+    can_delete = False
+    extra = 1
+    max_num = 1
+
+
+class RealEstateDetailInline(admin.StackedInline):
+    model = RealEstateDetail
+    can_delete = False
+    extra = 1
+    max_num = 1
+
+
+_INLINE_BY_SERVICE = {
+    'Logistics': LogisticsDetailInline,
+    'Car Hire': CarHireDetailInline,
+    'Real Estate': RealEstateDetailInline,
+}
+
+
 @admin.register(QuoteRequest)
 class QuoteRequestAdmin(LeadAdminBase):
-    list_display = LeadAdminBase.list_display + ('preferred_date',)
-    list_filter = LeadAdminBase.list_filter + ('preferred_date',)
-    search_fields = LeadAdminBase.search_fields + ('origin', 'destination', 'cargo_or_need')
+    list_display = ('quote_number',) + LeadAdminBase.list_display
+    list_display_links = ('quote_number',)
+    search_fields = ('quote_number',) + LeadAdminBase.search_fields
+    readonly_fields = LeadAdminBase.readonly_fields + ('quote_number',)
 
     fieldsets = (
+        ('Reference', {
+            'fields': ('quote_number',),
+        }),
         ('Customer', {
             'fields': ('name', 'email', 'phone', 'service'),
         }),
-        ('Request', {
-            'fields': ('origin', 'destination', 'preferred_date', 'cargo_or_need', 'message'),
+        ('Additional notes', {
+            'fields': ('message',),
         }),
         ('Handling', {
             'fields': ('is_handled', 'handled_notes'),
@@ -99,3 +157,17 @@ class QuoteRequestAdmin(LeadAdminBase):
             'fields': ('source', 'ip_address', 'user_agent', 'created_at', 'updated_at'),
         }),
     )
+
+    def get_inline_instances(self, request, obj=None):
+        """
+        Show only the detail inline matching this quote's service — a
+        Logistics request never displays empty Car Hire or Real Estate
+        fields, in admin or anywhere else. New (unsaved) objects get no
+        inline at all, since the service hasn't been chosen yet.
+        """
+        if obj is None:
+            return []
+        inline_class = _INLINE_BY_SERVICE.get(obj.service)
+        if inline_class is None:
+            return []
+        return [inline_class(self.model, self.admin_site)]
