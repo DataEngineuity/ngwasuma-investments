@@ -2,6 +2,7 @@ import { Send } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { services } from '../data/siteContent';
 import { submitQuote } from '../lib/api';
+import { transformQuoteForm } from '../lib/quoteFormMapper';
 
 const fallbackServices = ['Logistics', 'Car Hire', 'Real Estate'];
 
@@ -272,44 +273,28 @@ export default function QuoteForm({ defaultService = 'Logistics' }) {
     setLoading(true);
     setStatus({ type: 'idle', message: '' });
 
-    const details = form.details;
-
-    const payload = {
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      service: form.service,
-
-      // Normalized fields for current/future backend compatibility
-      origin: details.origin || details.pickupLocation || details.preferredArea || '',
-      destination: details.destination || details.returnLocation || '',
-      preferred_date: details.preferredDate || details.pickupDate || '',
-      cargo_or_need:
-        details.cargoType ||
-        details.vehicleType ||
-        details.propertyType ||
-        details.requestType ||
-        '',
-
-      message: buildMessage(form.service, details, form.notes),
-    };
+    const payload = transformQuoteForm(form);
 
     try {
-      await submitQuote(payload);
+      const response = await submitQuote(payload);
 
-    setForm({
-      ...baseForm,
-      service: normalizedDefaultService,
-    });
+      setForm({
+        ...baseForm,
+        service: normalizedDefaultService,
+      });
 
       setStatus({
         type: 'success',
-        message: 'Thank you. Your quote request has been received. Our team will contact you shortly.',
+        message: response?.quote_number
+          ? `Thank you. Your quote request has been received. Reference: ${response.quote_number}. Our team will contact you shortly.`
+          : 'Thank you. Your quote request has been received. Our team will contact you shortly.',
       });
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error.message || 'Unable to submit your quote request. Please try again or contact us directly.',
+        message:
+          error.message ||
+          'Unable to submit your quote request. Please try again or contact us directly.',
       });
     } finally {
       setLoading(false);
