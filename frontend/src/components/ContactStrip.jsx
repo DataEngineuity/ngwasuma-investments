@@ -1,9 +1,9 @@
 import { Building2, CalendarCheck2, CarFront, Mail, MessageCircle, Phone, Send, Truck } from 'lucide-react';
 import { useState } from 'react';
-import { contact } from '../data/siteContent';
+import { contact, services } from '../data/siteContent';
 import { submitQuote } from '../lib/api';
 
-const serviceOptions = ['Logistics', 'Car Hire', 'Real Estate', 'General Transport', 'Recovery Services', 'General Support'];
+const serviceOptions = ['Logistics', 'Car Hire', 'Real Estate', 'General Support'];
 
 const defaultForm = (service) => ({
   name: '',
@@ -125,7 +125,7 @@ export default function ContactStrip({
                 <label className="block">
                   <span className="mb-2 block text-xs font-black uppercase tracking-[0.18em] text-slate-400">Service needed</span>
                   <select name="service" value={form.service} onChange={update} className="input-field" required>
-                    {serviceOptions.map((service) => <option key={service}>{service}</option>)}
+                    {services.map((service) => <option key={service.slug}>{service.title}</option>)}
                   </select>
                 </label>
               </div>
