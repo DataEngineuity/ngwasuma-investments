@@ -1,7 +1,7 @@
 import Seo from '../components/Seo';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ContactStrip from '../components/ContactStrip';
+import HomeCTA from '../components/HomeCTA';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import ServiceCard from '../components/ServiceCard';
@@ -123,13 +123,7 @@ export default function Home() {
         </div>
       </section>
 
-{/*       <ContactStrip */}
-{/*         eyebrow="Ready to move forward" */}
-{/*         title="Let's get you moving." */}
-{/*         accent="Request a quote today." */}
-{/*         defaultService="Logistics" */}
-{/*         buttonLabel="Request a Quote" */}
-{/*       /> */}
+      <HomeCTA />
     </>
   );
 }
