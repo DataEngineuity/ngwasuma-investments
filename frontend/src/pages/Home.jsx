@@ -123,13 +123,13 @@ export default function Home() {
         </div>
       </section>
 
-      <ContactStrip
-        eyebrow="Ready to move forward"
-        title="Let's get you moving."
-        accent="Request a quote today."
-        defaultService="Logistics"
-        buttonLabel="Request a Quote"
-      />
+{/*       <ContactStrip */}
+{/*         eyebrow="Ready to move forward" */}
+{/*         title="Let's get you moving." */}
+{/*         accent="Request a quote today." */}
+{/*         defaultService="Logistics" */}
+{/*         buttonLabel="Request a Quote" */}
+{/*       /> */}
     </>
   );
 }
