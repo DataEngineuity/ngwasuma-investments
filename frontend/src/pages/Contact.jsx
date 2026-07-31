@@ -75,7 +75,6 @@ export default function Contact() {
                   <span className="min-w-0">
                     <strong className="block text-sm text-white">Address</strong>
                     <address className="mt-1 not-italic text-sm leading-6 text-white/70">
-                      Plot #1613, Off Chipandwe Road,<br />
                       Ibex Meanwood, Lusaka,<br />
                       Lusaka Province, Zambia
                     </address>
