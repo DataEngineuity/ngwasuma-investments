@@ -1,4 +1,4 @@
-import ContactStrip from '../components/ContactStrip';
+import AboutCTA from '../components/AboutCTA';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import StatsGrid from '../components/StatsGrid';
@@ -45,13 +45,7 @@ export default function About() {
           <ValueGrid />
         </div>
       </section>
-      <ContactStrip
-        eyebrow="Partner with us"
-        title="Ready for a dependable partner?"
-        accent="Let’s talk."
-        defaultService="General Support"
-        buttonLabel="Start Conversation"
-      />
+      <AboutCTA />
     </>
   );
 }

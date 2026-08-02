@@ -1,4 +1,4 @@
-import ContactStrip from '../components/ContactStrip';
+import ServicesCTA from '../components/ServicesCTA';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import ServiceCard from '../components/ServiceCard';
@@ -20,7 +20,7 @@ export default function Services() {
         titleAccent="Services"
         body="A portfolio of logistics, car hire and residential leasing services designed to create seamless movement and dependable support."
       />
-      <section className="bg-fog py-24">
+      <section className="bg-white py-24">
         <div className="container-page">
           <SectionHeading
             eyebrow="Ngwasuma solutions"
@@ -33,13 +33,7 @@ export default function Services() {
           </div>
         </div>
       </section>
-      <ContactStrip
-        eyebrow="Find the right solution"
-        title="Need logistics, transport or leasing support?"
-        accent="Speak to us."
-        defaultService="General Support"
-        buttonLabel="Request Assistance"
-      />
+      <ServicesCTA/>
     </>
   );
 }
