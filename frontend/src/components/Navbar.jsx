@@ -12,7 +12,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }, [pathname]);
 
   return (
@@ -26,7 +26,11 @@ export default function Navbar() {
               key={link.href}
               to={link.href}
               className={({ isActive }) =>
-                `${linkBase} ${isActive ? 'bg-white text-ink shadow-sm' : 'text-white/90 hover:bg-white/20 hover:text-white'}`
+                `${linkBase} ${
+                  isActive
+                    ? 'bg-white text-ink shadow-sm'
+                    : 'text-white/90 hover:bg-white/20 hover:text-white'
+                }`
               }
               end={link.href === '/'}
             >
@@ -35,7 +39,17 @@ export default function Navbar() {
           ))}
         </div>
 
-        <NavLink to="/quote" className="hidden lg:inline-flex btn-primary px-5 py-2.5">
+        <NavLink
+          to="/quote"
+          className={({ isActive }) =>
+            [
+              'hidden items-center justify-center rounded-full px-5 py-2.5 text-sm font-black transition lg:inline-flex',
+              isActive
+                ? 'bg-white text-ink shadow-sm ring-4 ring-limebrand/30'
+                : 'bg-limebrand text-ink hover:-translate-y-0.5 hover:brightness-105',
+            ].join(' ')
+          }
+        >
           Get a Quote
         </NavLink>
 
@@ -44,6 +58,7 @@ export default function Navbar() {
           onClick={() => setOpen((value) => !value)}
           className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white lg:hidden"
           aria-label="Toggle navigation"
+          aria-expanded={open}
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -57,14 +72,29 @@ export default function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={({ isActive }) =>
-                  `rounded-2xl px-4 py-3 text-sm font-black ${isActive ? 'bg-white text-ink' : 'text-white/90 hover:bg-white/10 hover:text-white'}`
+                  `rounded-2xl px-4 py-3 text-sm font-black transition ${
+                    isActive
+                      ? 'bg-white text-ink'
+                      : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  }`
                 }
                 end={link.href === '/'}
               >
                 {link.label}
               </NavLink>
             ))}
-            <NavLink to="/quote" className="btn-primary mt-2">
+
+            <NavLink
+              to="/quote"
+              className={({ isActive }) =>
+                [
+                  'mt-2 flex items-center justify-center rounded-2xl px-5 py-4 text-sm font-black transition',
+                  isActive
+                    ? 'bg-white text-ink ring-4 ring-limebrand/30'
+                    : 'bg-limebrand text-ink',
+                ].join(' ')
+              }
+            >
               Get a Quote
             </NavLink>
           </div>
